@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Seite</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dotty&display=swap" rel="stylesheet">
+    <style>
+        
+        .crazy-text {
+            color: rgb(0, 204, 255); 
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #2e2e2e;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        body.dark-mode .container {
+            background-color: #444;
+        }
+        button {
+            font-family: 'Dotty', sans-serif;
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: white;
+            background: #007bff; /* Schicke blaue Farbe */
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            background: #0056b3; /* Dunkleres Blau beim Hover */
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 204, 255, 0.7);
+        }
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(0, 204, 255, 0.7);
+        }
+        button.angry:hover {
+            background: #ff0000;
+            transform: none;
+            box-shadow: none;
+        }
+        .toggle-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #007bff; /* Schicke blaue Farbe */
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .toggle-button:hover {
+            background: #0056b3; /* Dunkleres Blau beim Hover */
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 204, 255, 0.7);
+        }
+        .toggle-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 10px rgba(0, 204, 255, 0.7);
+        }
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+    <script src="index.js"></script>
+</head>
+<body>
+    <button class="toggle-button" id="toggleButton">🌙</button>
+    <div class="container">
+        <h1 class="crazy-text">🔥 Willkommen auf meiner Website! 🚀</h1>
+        <button id="randomBtn">Splash Effekt! 💦</button>
+        <button id="aboutBtn">Über mich</button>
+    </div>
+    <div class="watermark">By Danil and GitHub Copilot</div>
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            toggleButton.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+    </script>
+</body>
+</html>

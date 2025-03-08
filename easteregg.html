@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fehler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dotty&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0000ff;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding-top: 5%;
+            overflow: hidden;
+            animation: glitch 1s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        @keyframes glitch {
+            0% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.5deg); }
+            5% { clip: rect(85px, 9999px, 140px, 0); transform: skew(0.5deg); }
+            10% { clip: rect(24px, 9999px, 67px, 0); transform: skew(0.5deg); }
+            15% { clip: rect(0px, 9999px, 100px, 0); transform: skew(0.5deg); }
+            20% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.5deg); }
+            25% { clip: rect(85px, 9999px, 140px, 0); transform: skew(0.5deg); }
+            30% { clip: rect(24px, 9999px, 67px, 0); transform: skew(0.5deg); }
+            35% { clip: rect(0px, 9999px, 100px, 0); transform: skew(0.5deg); }
+            40% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.5deg); }
+            45% { clip: rect(85px, 9999px, 140px, 0); transform: skew(0.5deg); }
+            50% { clip: rect(24px, 9999px, 67px, 0); transform: skew(0.5deg); }
+            55% { clip: rect(0px, 9999px, 100px, 0); transform: skew(0.5deg); }
+            60% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.5deg); }
+            65% { clip: rect(85px, 9999px, 140px, 0); transform: skew(0.5deg); }
+            70% { clip: rect(24px, 9999px, 67px, 0); transform: skew(0.5deg); }
+            75% { clip: rect(0px, 9999px, 100px, 0); transform: skew(0.5deg); }
+            80% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.5deg); }
+            85% { clip: rect(85px, 9999px, 140px, 0); transform: skew(0.5deg); }
+            90% { clip: rect(24px, 9999px, 67px, 0); transform: skew(0.5deg); }
+            95% { clip: rect(0px, 9999px, 100px, 0); transform: skew(0.5deg); }
+            100% { clip: rect(44px, 9999px, 56px, 0); transform: skew(0.5deg); }
+        }
+        #escapeBtn {
+            animation: shake 0.5s infinite;
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .console {
+            background-color: black;
+            color: green;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: left;
+            padding: 10px;
+            margin: 20px auto;
+            width: 80%;
+            height: 300px;
+            overflow-y: auto;
+            border: 2px solid green;
+        }
+        .input-field {
+            width: 80%;
+            padding: 10px;
+            margin: 20px auto;
+            border: 2px solid green;
+            background-color: black;
+            color: green;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>💀 Fehler 404: Website gehackt! 💀</h1>
+    <p>Die Website wurde gehackt und stürzt ab...</p>
+    <button id="escapeBtn">Fluchtversuch! 🏃‍♂️</button>
+    <div class="console" id="console">
+        <p>Initialisiere Hack...</p>
+        <p>Verbinde mit Server...</p>
+        <p>Server verbunden.</p>
+        <p>Starte Angriff...</p>
+        <p>Angriff erfolgreich.</p>
+        <p id="riddle"></p>
+    </div>
+    <input type="text" class="input-field" id="inputField" placeholder="Eingabe hier...">
+    <script>
+        const escapeBtn = document.getElementById('escapeBtn');
+        const inputField = document.getElementById('inputField');
+        const consoleDiv = document.getElementById('console');
+        const riddleElement = document.getElementById('riddle');
+
+        const riddles = [
+            { question: "Wie viele Bits hat ein Byte?", answer: "8" },
+            { question: "Was ist die Basis von binären Zahlen?", answer: "2" },
+            { question: "Wie viele Zustände hat ein Bit?", answer: "2" },
+            { question: "Was ist die Abkürzung für Random Access Memory?", answer: "RAM" },
+            { question: "Was ist die Abkürzung für Central Processing Unit?", answer: "CPU" },
+            { question: "Wie viele Bits hat ein Nibble?", answer: "4" },
+            { question: "Was ist die Abkürzung für Graphics Processing Unit?", answer: "GPU" },
+            { question: "Was ist die Abkürzung für Read-Only Memory?", answer: "ROM" },
+            { question: "Was ist die Abkürzung für Universal Serial Bus?", answer: "USB" },
+            { question: "Was ist der Datentyp für eine Zeichenkette in JavaScript?", answer: "string" },
+            { question: "Was ist der Datentyp für eine Ganzzahl in JavaScript?", answer: "number" },
+            { question: "Was ist der Datentyp für Wahrheitswerte in JavaScript?", answer: "boolean" },
+            { question: "Was ist der Datentyp für ein Objekt in JavaScript?", answer: "object" },
+            { question: "Was ist der Datentyp für eine Funktion in JavaScript?", answer: "function" }
+        ];
+
+        let correctAnswers = 0;
+        let lives = 3;
+        let currentRiddle = getRandomRiddle();
+
+        function getRandomRiddle() {
+            const selectedRiddle = riddles[Math.floor(Math.random() * riddles.length)];
+            riddleElement.textContent = `Rätsel: ${selectedRiddle.question}`;
+            return selectedRiddle;
+        }
+
+        inputField.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                if (inputField.value.trim().toLowerCase() === currentRiddle.answer.toLowerCase()) {
+                    correctAnswers++;
+                    if (correctAnswers >= 3) {
+                        escapeBtn.classList.remove("angry");
+                        escapeBtn.textContent = "Zurück zur normalen Seite";
+                        escapeBtn.style.animation = "none";
+                        escapeBtn.style.background = "green";
+                        escapeBtn.addEventListener('click', () => {
+                            window.location.href = "index.html";
+                        });
+                    } else {
+                        currentRiddle = getRandomRiddle();
+                        inputField.value = '';
+                    }
+                } else {
+                    lives--;
+                    consoleDiv.innerHTML = ''; // Clear console
+                    const errorMessage = document.createElement('p');
+                    errorMessage.textContent = `Falsche Antwort. Versuche es erneut. Verbleibende Leben: ${lives}`;
+                    consoleDiv.appendChild(errorMessage);
+                    inputField.value = '';
+                    // Erhöhe die Frequenz der Grafikfehler
+                    clearInterval(glitchInterval);
+                    glitchInterval = setInterval(createGlitch, 100);
+                    if (lives <= 0) {
+                        const gameOverMessage = document.createElement('p');
+                        gameOverMessage.textContent = "Game Over. Keine Leben mehr.";
+                        consoleDiv.appendChild(gameOverMessage);
+                        inputField.disabled = true;
+                    }
+                }
+            }
+        });
+
+        // Zeige die Lösung in der Browser-Konsole
+        console.log(`Die Antwort auf das Rätsel ist: ${currentRiddle.answer}`);
+
+        // Simuliere Grafikfehler
+        function createGlitch() {
+            const glitchElement = document.createElement('div');
+            glitchElement.style.position = 'fixed';
+            glitchElement.style.top = `${Math.random() * 100}%`;
+            glitchElement.style.left = `${Math.random() * 100}%`;
+            glitchElement.style.width = `${Math.random() * 200}px`;
+            glitchElement.style.height = `${Math.random() * 200}px`;
+            glitchElement.style.backgroundColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+            glitchElement.style.opacity = '0.5';
+            glitchElement.style.zIndex = '1000';
+            document.body.appendChild(glitchElement);
+
+            setTimeout(() => {
+                glitchElement.remove();
+            }, 100);
+        }
+
+        let glitchInterval = setInterval(createGlitch, 200);
+    </script>
+</body>
+</html>
