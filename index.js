@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll("button");
-    const clickSound = new Audio('src/click-sound.mp3');
+    const clickSound = new Audio('src/sounds/click-sound.mp3');
     let clickCount = 0;
     let maxClicks = getRandomMaxClicks();
     let angryCount = 0;
@@ -42,6 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 randomButton.style.transform = "scale(1)";
             }, 200);
         }
+    });
+
+    document.getElementById('randomBtn').addEventListener('click', function() {
+        var audio = document.getElementById('confetti-sound');
+        audio.play();
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
     });
 
     const aboutButton = document.querySelector("#aboutBtn");

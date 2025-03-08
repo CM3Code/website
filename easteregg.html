@@ -114,15 +114,50 @@
             { question: "Was ist die Abkürzung für Graphics Processing Unit?", answer: "GPU" },
             { question: "Was ist die Abkürzung für Read-Only Memory?", answer: "ROM" },
             { question: "Was ist die Abkürzung für Universal Serial Bus?", answer: "USB" },
-            { question: "Was ist der Datentyp für eine Zeichenkette in JavaScript?", answer: "string" },
-            { question: "Was ist der Datentyp für eine Ganzzahl in JavaScript?", answer: "number" },
-            { question: "Was ist der Datentyp für Wahrheitswerte in JavaScript?", answer: "boolean" },
-            { question: "Was ist der Datentyp für ein Objekt in JavaScript?", answer: "object" },
-            { question: "Was ist der Datentyp für eine Funktion in JavaScript?", answer: "function" }
+            { question: "Was ist der primitve Datentyp für eine Ganzzahl in Java?", answer: "int" },
+            { question: "Was ist der primitve Datentyp für eine Fließkommazahl in Java?", answer: "double" },
+            { question: "Was ist der primitve Datentyp für einen einzelnen Buchstaben in Java?", answer: "char" },
+            { question: "Was ist der primitve Datentyp für Wahrheitswerte in Java?", answer: "boolean" },
+            { question: "Was ist der primitve Datentyp für eine 64-Bit-Ganzzahl in Java?", answer: "long" },
+            { question: "Was ist der primitve Datentyp für eine 16-Bit-Ganzzahl in Java?", answer: "short" },
+            { question: "Was ist der primitve Datentyp für eine 8-Bit-Ganzzahl in Java?", answer: "byte" },
+            { question: "Was ist der primitve Datentyp für eine 32-Bit-Fließkommazahl in Java?", answer: "float" },
+            { question: "Was ist der Datentyp für eine Zeichenkette in Java?", answer: "String" },
+            { question: "Was ist der Datentyp für ein Array in Java?", answer: "Object" },
+            { question: "Was ist der Datentyp für eine Liste in Java?", answer: "List" },
+            { question: "Was ist der Datentyp für eine Map in Java?", answer: "Map" },
+            { question: "Was ist der Datentyp für eine Menge in Java?", answer: "Set" },
+            { question: "Was ist der Datentyp für eine Funktion in Java?", answer: "Function" },
+            { question: "Was ist die maximale Größe eines `int` in Java?", answer: "2147483647" },
+            { question: "Was ist die maximale Größe eines `long` in Java?", answer: "9223372036854775807" },
+            { question: "Was ist die maximale Größe eines `short` in Java?", answer: "32767" },
+            { question: "Was ist die maximale Größe eines `byte` in Java?", answer: "127" },
+            { question: "Was ist die maximale Größe eines `float` in Java?", answer: "3.4028235E38" },
+            { question: "Was ist die maximale Größe eines `double` in Java?", answer: "1.7976931348623157E308" },
+            { question: "Was ist die minimale Größe eines `int` in Java?", answer: "-2147483648" },
+            { question: "Was ist die minimale Größe eines `long` in Java?", answer: "-9223372036854775808" },
+            { question: "Was ist die minimale Größe eines `short` in Java?", answer: "-32768" },
+            { question: "Was ist die minimale Größe eines `byte` in Java?", answer: "-128" },
+            { question: "Was ist die minimale Größe eines `float` in Java?", answer: "1.4E-45" },
+            { question: "Was ist die minimale Größe eines `double` in Java?", answer: "4.9E-324" },
+            { question: "Was ist die maximale Anzahl von Kernen in einer modernen CPU?", answer: "128" },
+            { question: "Was ist die maximale Anzahl von Threads in einer modernen CPU?", answer: "256" },
+            { question: "Was ist die maximale Anzahl von PCIe-Lanes in einer modernen CPU?", answer: "128" },
+            { question: "Was ist die maximale Anzahl von USB-Ports in einer modernen CPU?", answer: "40" },
+            { question: "Was ist die maximale Anzahl von SATA-Ports in einer modernen CPU?", answer: "12" },
+            { question: "Was ist die maximale Anzahl von RAM-Steckplätzen in einer modernen CPU?", answer: "8" },
+            { question: "Was ist die maximale Anzahl von DIMMs in einer modernen CPU?", answer: "16" },
+            { question: "Was ist die maximale Anzahl von PCIe-Slots in einer modernen CPU?", answer: "7" },
+            { question: "Was ist die maximale Anzahl von NVMe-Slots in einer modernen CPU?", answer: "4" },
+            { question: "Was ist die maximale Anzahl von SATA-Ports in einer modernen CPU?", answer: "12" },
+            { question: "Was ist die maximale Anzahl von USB-Ports in einer modernen CPU?", answer: "40" },
+            { question: "Was ist die maximale Anzahl von PCIe-Lanes in einer modernen CPU?", answer: "128" },
+            { question: "Was ist die maximale Anzahl von Threads in einer modernen CPU?", answer: "256" },
+            { question: "Was ist die maximale Anzahl von Kernen in einer modernen CPU?", answer: "128" }
         ];
 
         let correctAnswers = 0;
-        let lives = 3;
+        let lives = 1;
         let currentRiddle = getRandomRiddle();
 
         function getRandomRiddle() {
@@ -145,13 +180,14 @@
                         });
                     } else {
                         currentRiddle = getRandomRiddle();
+                        console.log(currentRiddle);
                         inputField.value = '';
                     }
                 } else {
                     lives--;
                     consoleDiv.innerHTML = ''; // Clear console
                     const errorMessage = document.createElement('p');
-                    errorMessage.textContent = `Falsche Antwort. Versuche es erneut. Verbleibende Leben: ${lives}`;
+                    errorMessage.textContent = `Falsche Antwort.`;
                     consoleDiv.appendChild(errorMessage);
                     inputField.value = '';
                     // Erhöhe die Frequenz der Grafikfehler
@@ -159,16 +195,20 @@
                     glitchInterval = setInterval(createGlitch, 100);
                     if (lives <= 0) {
                         const gameOverMessage = document.createElement('p');
-                        gameOverMessage.textContent = "Game Over. Keine Leben mehr.";
+                        gameOverMessage.textContent = "Game Over.";
                         consoleDiv.appendChild(gameOverMessage);
                         inputField.disabled = true;
+                        setTimeout(() => {
+                            avascript:location.reload();
+                        }, 1500);
+                        j
                     }
                 }
             }
         });
 
         // Zeige die Lösung in der Browser-Konsole
-        console.log(`Die Antwort auf das Rätsel ist: ${currentRiddle.answer}`);
+        console.log(currentRiddle);
 
         // Simuliere Grafikfehler
         function createGlitch() {
@@ -188,7 +228,30 @@
             }, 100);
         }
 
+        
+        
         let glitchInterval = setInterval(createGlitch, 200);
     </script>
 </body>
+
+<script>
+    const icons = [
+        "src/icons/easteregg1.png",
+        "src/icons/easteregg2.png"
+    ];
+    let currentIconIndex = 0;
+
+    function changeFavicon() {
+        const link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+            const newLink = document.createElement('link');
+            newLink.rel = 'icon';
+            document.head.appendChild(newLink);
+        }
+        document.querySelector("link[rel~='icon']").href = icons[currentIconIndex];
+        currentIconIndex = (currentIconIndex + 1) % icons.length;
+    }
+
+    setInterval(changeFavicon, 1000); // Change icon every second
+</script>
 </html>

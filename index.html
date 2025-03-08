@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dotty&display=swap" rel="stylesheet">
+    <link rel="icon" href="src/icons/MainIcon.png" type="image/x-icon">
     <style>
         
         .crazy-text {
@@ -95,14 +96,16 @@
         }
     </style>
     <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
-<body>
-    <button class="toggle-button" id="toggleButton">🌙</button>
+<body class="dark-mode">
+    <button class="toggle-button" id="toggleButton">☀️</button>
     <div class="container">
         <h1 class="crazy-text">🔥 Willkommen auf meiner Website! 🚀</h1>
         <button id="randomBtn">Splash Effekt! 💦</button>
         <button id="aboutBtn">Über mich</button>
     </div>
+    <audio id="confetti-sound" src="src/sounds/confetti.mp3" preload="auto"></audio>
     <div class="watermark">By Danil and GitHub Copilot</div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
