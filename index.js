@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     teacherButton.addEventListener("click", () => {
         clickSound.play();
         setTimeout(() => {
-            window.location.href = "fuerlehrer.html";
+            window.location.href = "about.html";
         }, 500);
         
     });
