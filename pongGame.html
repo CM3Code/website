@@ -26,7 +26,7 @@
         let aiY = canvas.height / 2 - paddleHeight / 2;
         let ballX = canvas.width / 2 - ballSize / 2;
         let ballY = canvas.height / 2 - ballSize / 2;
-        let ballSpeedX = 1.5, ballSpeedY = 1.5; // Reduced speed
+        let ballSpeedX = 1, ballSpeedY = 1; // Further reduced speed
         let playerScore = 0, aiScore = 0;
 
         function draw() {
@@ -70,9 +70,9 @@
 
             // AI movement
             if (aiY + paddleHeight / 2 < ballY) {
-                aiY += 1.5; // Reduced AI speed
+                aiY += 1; // Further reduced AI speed
             } else {
-                aiY -= 1.5; // Reduced AI speed
+                aiY -= 1; // Further reduced AI speed
             }
 
             draw();

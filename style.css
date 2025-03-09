@@ -9,6 +9,9 @@ body {
     align-items: center;
     font-family: 'Press Start 2P', cursive; /* Pixel-like font */
     overflow: hidden;
+    background-color: rgb(46, 46, 46);
+    margin: 0;
+    padding: 0;
 }
 
 /* Styling für Buttons */
@@ -77,7 +80,11 @@ button.angry {
     background: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 15px;
-    max-width: 500px;
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: rgb(68, 68, 68);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .button {
@@ -94,4 +101,17 @@ button.angry {
 
 .button:hover {
     background: #00ffff;
+}
+
+h1 {
+    font-family: 'Dotty', sans-serif;
+    color: rgb(0, 204, 255);
+}
+
+.step img {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
 }

@@ -62,5 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
         
     });
+
+    const teacherButton = document.querySelector("#teacherBtn");
+    teacherButton.addEventListener("click", () => {
+        clickSound.play();
+        setTimeout(() => {
+            window.location.href = "fuerlehrer.html";
+        }, 500);
+        
+    });
    
 });
