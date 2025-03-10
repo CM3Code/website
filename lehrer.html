@@ -1,158 +1,163 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartboard Tutorial</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            background-color: rgb(46, 46, 46);
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Prevent scrolling on the main window */
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: rgb(68, 68, 68);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .tutorial-container {
-            overflow-y: auto; /* Add vertical scrollbar if content is too long */
-            max-height: 80vh; /* Limit the height of the container */
-        }
-        h1 {
-            font-family: 'Dotty', sans-serif;
-            color: rgb(0, 204, 255);
-        }
-        .step img {
-            width: 100%;
-        }
-        .hidden {
-            display: none;
-        }
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #333;
-            border: none;
-            cursor: pointer;
-            z-index: 1;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-        .back-button:hover {
-            background-color: #555;
-            transform: scale(1.1) rotate(10deg);
-        }
-        .back-button:active {
-            background-color: #777;
-            transform: scale(0.9) rotate(-10deg);
-        }
-        .back-button::before {
-            content: '← ';
-            margin-right: 5px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            position: sticky;
-            top: 0;
-            background-color: rgb(68, 68, 68);
-            z-index: 2;
-            padding: 10px 0;
-        }
-    </style>
-</head>
-<body>
-    <button class="back-button" onclick="location.href='index.html'">Zurück</button>
-    <div class="container">
-        <h1>Probleme und ihre Lösungen</h1>
-        <div class="button-container">
-            <button onclick="showSmartboardtutorial()">Sie kriegen das Smartboard nicht an</button>
-            <button onclick="showDisplayModeTutorial()">Sie kriegen den Display Modus nicht geändert</button>
-        </div>
-        <div id="Smartboardtutorial" class="tutorial-container hidden">
-            <h2>Problem: Smartboard Geht nicht an</h2>
-            <div class="step">
-                <h2>Schritt 1</h2>
-                <p>Display Modus überprüfen</p>
-                <p2>siehe "Problem: Display Modus ändern"</p2>
-            </div>
-            <div class="step">
-                <h2>Schritt 2</h2>
-                <p>Lokalisieren sie das Netzkabel</p>
-                <img src="src/images/smartboardFix/image1.jpg" alt="Smartboard Bild 1">
-            </div>
-            <div class="step">
-                <h2>Schritt 3</h2>
-                <p>Ziehen sie das Netzkabel raus und warten Sie Drei Sekunden</p>
-                <img src="src/images/smartboardFix/image2.jpg" alt="Smartboard Bild 2">
-            </div>
-            <div class="step">
-                <h2>Schritt 4</h2>
-                <p>Stecken sie das Netzkabel wieder hinein</p>
-                <img src="src/images/smartboardFix/image3.jpg" alt="Smartboard Bild 3">
-            </div>
-            <div class="step">
-                <h2>Schritt 5</h2>
-                <p>Warten sie Bis der "Power" Knopf Orange/Rot leuchtet und drücken sie diesen</p>     
-<img src="src/images/smartboardFix/image4.jpg" alt="Smartboard Bild 4">  
-        <div id="displayModeTutorial" class="tutorial-container hidden">
-            </div>
-          <div class="step">
-                <h2>Schritt 6</h2>
-                <p> Voila! Der Knopf müsste jetzt Grün leuchten/Blinken</p>
-<img src="src/images/smartboardFix/image5.jpg" alt="Smartboard Bild 5">
-        <div id="displayModeTutorial" class="tutorial-container hidden">
-            </div
-            </div>
-        </div>
-            <h2>Problem: Display Modus ändern</h2>
-            <div class="step">
-                <h2>Schritt 1</h2>
-                <p>Öffnen Sie die Einstellungen mit der Tastenkombination Windows + "I" auf der Tastatur</p>
-                <img src="src/images/DisplayModeTutorial/Tastenkombination.png" alt="Display Modus Bild 1">
-            </div>
-            <div class="step">
-                <h2>Schritt 2</h2>
-                <p>Wählen Sie "System" und dann "Anzeige/Bildschirm"</p>
-                <img src="src/images/DisplayModeTutorial/Einstellungen.png" alt="Display Modus Bild 2">
-            </div>
-            <div class="step">
-                <h2>Schritt 3</h2>
-                <p>Ändern Sie den Anzeigemodus nach Bedarf</p>
-                <img src="src/images/DisplayModeTutorial/AnzeigemodusAuswaehlen.png" alt="Display Modus Bild 3">
-            </div>
-        </div>
+<!DOCTYPE html>  
+<html lang="de">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Smartboard Tutorial</title>  
+    <link rel="stylesheet" href="style.css">  
+    <style>  
+        body {  
+            background-color: rgb(46, 46, 46);  
+            color: white;  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 0;  
+            overflow: hidden; /* Prevent scrolling on the main window */  
+        }  
+        .container {  
+            max-width: 800px;  
+            margin: 50px auto;  
+            padding: 20px;  
+            background-color: rgb(68, 68, 68);  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+            border-radius: 8px;  
+            position: absolute;  
+            top: 50%;  
+            left: 50%;  
+            transform: translate(-50%, -50%);  
+        }  
+        .tutorial-container {  
+            overflow-y: auto; /* Add vertical scrollbar if content is too long */  
+            max-height: 80vh; /* Limit the height of the container */  
+        }  
+        h1 {  
+            font-family: 'Dotty', sans-serif;  
+            color: rgb(0, 204, 255);  
+        }  
+        .step img {  
+            width: 100%;  
+        }  
+        .hidden {  
+            display: none;  
+        }  
+        .back-button {  
+            position: absolute;  
+            top: 20px;  
+            left: 20px;  
+            padding: 10px 20px;  
+            font-size: 1em;  
+            color: #fff;  
+            background-color: #333;  
+            border: none;  
+            cursor: pointer;  
+            z-index: 1;  
+            transition: transform 0.3s, background-color 0.3s;  
+        }  
+        .back-button:hover {  
+            background-color: #555;  
+            transform: scale(1.1) rotate(10deg);  
+        }  
+        .back-button:active {  
+            background-color: #777;  
+            transform: scale(0.9) rotate(-10deg);  
+        }  
+        .back-button::before {  
+            content: '← ';  
+            margin-right: 5px;  
+        }  
+        .button-container {  
+            display: flex;  
+            justify-content: space-between;  
+            margin-bottom: 20px;  
+            position: sticky;  
+            top: 0;  
+            background-color: rgb(68, 68, 68);  
+            z-index: 2;  
+            padding: 10px 0;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <button class="back-button" onclick="location.href='index.html'">Zurück</button>  
+    <div class="container">  
+        <h1>Probleme und ihre Lösungen</h1>  
+        <div class="button-container">  
+            <button onclick="showSmartboardtutorial()">Sie kriegen das Smartboard nicht an</button>  
+            <button onclick="showDisplayModeTutorial()">Sie kriegen den Display Modus nicht geändert</button>  
+        </div>  
 
-    </div>
-    <script>
-        function showSmartboardtutorial() {
-            document.getElementById('Smartboardtutorial').classList.toggle('hidden');
-            if (!document.getElementById('displayModeTutorial').classList.contains('hidden')) {
-                document.getElementById('displayModeTutorial').classList.add('hidden');
-            }
-        }
-        function showDisplayModeTutorial() {
-            document.getElementById('displayModeTutorial').classList.toggle('hidden');
-            if (!document.getElementById('Smartboardtutorial').classList.contains('hidden')) {
-                document.getElementById('Smartboardtutorial').classList.add('hidden');
-            }
-        }
-    </script>
-</body>
+        <div id="Smartboardtutorial" class="tutorial-container hidden">  
+            <h2>Problem: Smartboard geht nicht an</h2>  
+            <div class="step">  
+                <h2>Schritt 1</h2>  
+                <p>Display Modus überprüfen</p>  
+                <p>siehe "Problem: Display Modus ändern"</p>  
+            </div>  
+            <div class="step">  
+                <h2>Schritt 2</h2>  
+                <p>Lokalisieren Sie das Netzkabel</p>  
+                <img src="src/images/smartboardFix/image1.png" alt="Smartboard Bild 1">  
+            </div>  
+            <div class="step">  
+                <h2>Schritt 3</h2>  
+                <p>Ziehen Sie das Netzkabel raus und warten Sie drei Sekunden</p>  
+                <img src="src/images/smartboardFix/image2.png" alt="Smartboard Bild 2">  
+            </div>  
+            <div class="step">  
+                <h2>Schritt 4</h2>  
+                <p>Stecken Sie das Netzkabel wieder hinein</p>  
+                <img src="src/images/smartboardFix/image3.png" alt="Smartboard Bild 3">  
+            </div>  
+            <div class="step">  
+                <h2>Schritt 5</h2>  
+                <p>Warten Sie bis der "Power" Knopf orange/rot leuchtet und drücken Sie diesen</p>  
+                <img src="src/images/smartboardFix/image4.png" alt="Smartboard Bild 4">    
+            </div>  
+            <div class="step">  
+                <h2>Schritt 6</h2>  
+                <p>Voila! Der Knopf müsste jetzt grün leuchten/blinken</p>  
+                <img src="src/images/smartboardFix/image5.png" alt="Smartboard Bild 5">  
+            </div>  
+        </div>  
+
+        <div id="displayModeTutorial" class="tutorial-container hidden">  
+            <h2>Problem: Display Modus ändern</h2>  
+            <div class="step">  
+                <h2>Schritt 1</h2>  
+                <p>Öffnen Sie die Einstellungen mit der Tastenkombination Windows + "I" auf der Tastatur</p>  
+                <img src="src/images/DisplayModeTutorial/Tastenkombination.png" alt="Display Modus Bild 1">  
+            </div>  
+            <div class="step">  
+                <h2>Schritt 2</h2>  
+                <p>Wählen Sie "System" und dann "Anzeige/Bildschirm"</p>  
+                <img src="src/images/DisplayModeTutorial/Einstellungen.png" alt="Display Modus Bild 2">  
+            </div>  
+            <div class="step">  
+                <h2>Schritt 3</h2>  
+                <p>Ändern Sie den Anzeigemodus nach Bedarf</p>  
+                <img src="src/images/DisplayModeTutorial/AnzeigemodusAuswaehlen.png" alt="Display Modus Bild 3">  
+            </div>  
+        </div>  
+
+    </div>  
+
+    <script>  
+        function showSmartboardtutorial() {  
+            let smartboardTutorial = document.getElementById('Smartboardtutorial');  
+            let displayModeTutorial = document.getElementById('displayModeTutorial');  
+            
+            smartboardTutorial.classList.toggle('hidden');  
+            displayModeTutorial.classList.add('hidden'); // Sicherstellen, dass das andere Tutorial geschlossen wird  
+        }  
+
+        function showDisplayModeTutorial() {  
+            let smartboardTutorial = document.getElementById('Smartboardtutorial');  
+            let displayModeTutorial = document.getElementById('displayModeTutorial');  
+            
+            displayModeTutorial.classList.toggle('hidden');  
+            smartboardTutorial.classList.add('hidden'); // Sicherstellen, dass das andere Tutorial geschlossen wird  
+        }  
+    </script>  
+
+</body>  
 </html>
