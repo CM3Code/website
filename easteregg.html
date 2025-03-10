@@ -159,6 +159,7 @@
         let correctAnswers = 0;
         let lives = 1;
         let currentRiddle = getRandomRiddle();
+        let adminMode = false;
 
         function getRandomRiddle() {
             const selectedRiddle = riddles[Math.floor(Math.random() * riddles.length)];
@@ -168,7 +169,11 @@
 
         inputField.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                if (inputField.value.trim().toLowerCase() === currentRiddle.answer.toLowerCase()) {
+                if (inputField.value.trim() === "DanilK") {
+                    adminMode = true;
+                    alert(`Admin-Modus aktiviert. Lösung: ${currentRiddle.answer}`);
+                    inputField.value = '';
+                } else if (inputField.value.trim().toLowerCase() === currentRiddle.answer.toLowerCase()) {
                     correctAnswers++;
                     if (correctAnswers >= 3) {
                         escapeBtn.classList.remove("angry");
@@ -180,6 +185,9 @@
                         });
                     } else {
                         currentRiddle = getRandomRiddle();
+                        if (adminMode) {
+                            alert(`Lösung: ${currentRiddle.answer}`);
+                        }
                         console.log(currentRiddle);
                         inputField.value = '';
                     }
@@ -201,7 +209,6 @@
                         setTimeout(() => {
                             avascript:location.reload();
                         }, 1500);
-                        j
                     }
                 }
             }
