@@ -3,117 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Seite</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dotty&display=swap" rel="stylesheet">
-    <link rel="icon" href="src/icons/MainIcon.png" type="image/x-icon">
+    <title>In Arbeit - Unsere Webseite wird gebaut</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        .crazy-text {
-            color: rgb(0, 204, 255); 
-        }
         body {
-            background-color: #f4f4f4;
-            color: #333;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        body.dark-mode {
-            background-color: #2e2e2e;
-            color: white;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-        body.dark-mode .container {
-            background-color: #444;
-        }
-        button {
-            font-family: 'Dotty', sans-serif;
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            color: white;
-            background: #007bff; /* Schicke blaue Farbe */
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-        }
-        button:hover {
-            background: #0056b3; /* Dunkleres Blau beim Hover */
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0, 204, 255, 0.7);
-        }
-        button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 10px rgba(0, 204, 255, 0.7);
-        }
-        button.angry:hover {
-            background: #ff0000;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .toggle-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #007bff; /* Schicke blaue Farbe */
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-        }
-        .toggle-button:hover {
-            background: #0056b3; /* Dunkleres Blau beim Hover */
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0, 204, 255, 0.7);
-        }
-        .toggle-button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 10px rgba(0, 204, 255, 0.7);
-        }
-        .watermark {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: #888;
+            font-family: 'Inter', sans-serif;
         }
     </style>
-    <script src="index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
-<body class="dark-mode">
-    <button class="toggle-button" id="toggleButton">☀️</button>
-    <div class="container">
-        <h1 class="crazy-text">🔥 Willkommen auf meiner Website! 👨‍💻</h1>
-        <button id="randomBtn">Splash Effekt! 💦</button>
-        <button id="aboutBtn">Über mich</button>
-        <button id="teacherBtn">Für Lehrer👨‍🏫👩‍🏫🧑‍🏫</button>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl max-w-2xl w-full text-center transform hover:scale-105 transition-transform duration-300 ease-in-out">
+        <!-- Placeholder Bild -->
+        <img
+            src="https://placehold.co/600x300/e0f2fe/007bff?text=Webseite+im+Bau"
+            alt="Webseite im Bau Placeholder Bild"
+            class="w-full h-auto rounded-xl mb-8 border-4 border-blue-200 shadow-md"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x300/cccccc/333333?text=Bild+nicht+verfügbar';"
+        >
+
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 leading-tight">
+            Wir bauen etwas Großartiges!
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-6">
+            Unsere Webseite befindet sich derzeit im Aufbau. Wir arbeiten hart daran, Ihnen bald eine fantastische Erfahrung zu bieten.
+        </p>
+        <p class="text-md md:text-lg text-gray-500 mb-8">
+            Bitte schauen Sie bald wieder vorbei!
+        </p>
     </div>
-    <audio id="confetti-sound" src="src/sounds/confetti.mp3" preload="auto"></audio>
-    <div class="watermark">By Danil and GitHub Copilot</div>
-    <script>
-        const toggleButton = document.getElementById('toggleButton');
-        toggleButton.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            toggleButton.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-        });
-    </script>
 </body>
 </html>
