@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeSlots</title>
+    <!-- Tailwind CSS für responsives und modernes Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tone.js für die Soundeffekte -->
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.58/build/Tone.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Balsamiq+Sans:wght@700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Spezial-Styling für Walzen und den Rahmen */
+        .slot-machine-frame {
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            border: 8px solid #facc15;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        /* Container für die erweiterte Walzenansicht */
+        .reel-container {
+            width: 112px;
+            height: 160px; /* Zeigt 1 Symbol in der Mitte an */
+            overflow: hidden;
+            position: relative;
+            background-color: #e2e8f0;
+            border-radius: 12px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .reel-inner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            transition: transform 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        .reel-symbol {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Balsamiq Sans', cursive;
+            font-size: 3.5rem;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Button-Styling mit Schatten und Hover-Effekt */
+        #spin-button {
+            background-image: linear-gradient(to right, #ef4444, #dc2626);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+        #spin-button:hover {
+            transform: scale(1.05);
+            background-image: linear-gradient(to right, #dc2626, #b91c1c);
+        }
+        #spin-button:disabled {
+            background-image: linear-gradient(to right, #9ca3af, #6b7280);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Chips für den Chip-Regen */
+        .chip-rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            overflow: hidden;
+        }
+        .chip {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            opacity: 0;
+            animation: fall 3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        
+        /* Verschiedene Farben und Größen für die Chips */
+        .chip.gold { background-color: #facc15; }
+        .chip.silver { background-color: #e5e7eb; }
+        .chip.bronze { background-color: #b45309; }
+        .chip.large { width: 24px; height: 24px; }
+        .chip.small { width: 12px; height: 12px; }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(0) scale(1) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) scale(0.8) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Win Message Animation */
+        .win-message {
+            animation: win-pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes win-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); text-shadow: 0 0 10px #facc15, 0 0 20px #facc15; }
+        }
+
+        /* Styling für den "geriggten" Buchstaben, damit er anklickbar aussieht */
+        #rigged-o {
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        #rigged-o:hover {
+            color: #4ade80; /* Grüne Farbe bei Hover */
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Hauptcontainer für die Slotmaschine -->
+    <div class="flex flex-col items-center justify-center p-8 rounded-3xl slot-machine-frame">
+        <h1 class="text-5xl font-extrabold mb-6 text-yellow-300 tracking-wider font-['Balsamiq_Sans']">SL<span id="rigged-o">O</span>TS</h1>
+        
+        <!-- Guthabenanzeige mit Schipps-Währung -->
+        <div class="mb-4 text-xl font-bold flex items-center bg-gray-800 p-2 rounded-lg px-4 border border-yellow-400">
+            Guthaben: <span id="balance" class="ml-2 text-yellow-300">1000</span> Schipps
+        </div>
+        
+
+        <!-- Walzencontainer -->
+        <div class="flex space-x-4 mb-8">
+            <div class="reel-container">
+                <div id="reel1-inner" class="reel-inner"></div>
+            </div>
+            <div class="reel-container">
+                <div id="reel2-inner" class="reel-inner"></div>
+            </div>
+            <div class="reel-container">
+                <div id="reel3-inner" class="reel-inner"></div>
+            </div>
+        </div>
+
+        <!-- Button zum Drehen -->
+        <button id="spin-button" class="text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform">
+            Drehen (10 Schipps)
+        </button>
+    
+
+        <!-- Nachrichtenbereich -->
+        <div id="message-box" class="mt-6 text-2xl font-bold h-8 text-center min-h-[32px]"></div>
+
+        <div id="info-box" class="mt-4 text-sm text-gray-400 text-center">
+            <sub> Dies ist eine Fiktive Slotmaschine </sub>
+        </div>
+    </div>
+
+    
+
+    <!-- Container für den Chip-Regen -->
+    <div id="chip-rain-container" class="chip-rain-container"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const symbols = ['🍒', '🍋', '🔔', '🍇', '💎', '🍀'];
+            const reelInners = document.querySelectorAll('.reel-inner');
+            const spinButton = document.getElementById('spin-button');
+            const messageBox = document.getElementById('message-box');
+            const chipRainContainer = document.getElementById('chip-rain-container');
+            const balanceDisplay = document.getElementById('balance');
+            const riggedO = document.getElementById('rigged-o');
+            
+            let isSpinning = false;
+            let balance = 1000;
+            const spinCost = 10;
+            const winMultiplier = 5;
+            const symbolHeight = 160;
+
+            // Tone.js Sounds einrichten
+            const spinSound = new Tone.NoiseSynth({
+                noise: { type: 'pink' },
+                envelope: { attack: 0.005, decay: 0.1, sustain: 0.05 }
+            }).toDestination();
+            
+            const winSound = new Tone.MetalSynth({
+                frequency: 200,
+                envelope: { attack: 0.001, decay: 0.2, release: 0.1 },
+                harmonicity: 3.1,
+                modulationIndex: 32,
+                resonance: 4000,
+                octaves: 1.5
+            }).toDestination();
+
+            const switchSound = new Tone.PluckSynth({
+                attackNoise: 1,
+                dampening: 8000
+            }).toDestination();
+            
+            balanceDisplay.textContent = balance;
+            updateButtonState();
+
+            // Initialisiert die Walzen mit den Symbolen
+            function initializeReels() {
+                reelInners.forEach(reelInner => {
+                    const reelSymbols = [...symbols, ...symbols, ...symbols, ...symbols];
+                    reelInner.innerHTML = reelSymbols.map(s => `<div class="reel-symbol">${s}</div>`).join('');
+                });
+            }
+            initializeReels();
+
+            // Event-Listener für den normalen Spin-Button
+            spinButton.addEventListener('click', () => spin(false));
+            
+            // Event-Listener für den geriggten "O"-Button
+            riggedO.addEventListener('click', () => {
+                if (balance >= spinCost) {
+                    spin(true);
+                } else {
+                    messageBox.textContent = 'Zu wenig Schipps für einen geriggten Spin!';
+                }
+            });
+
+            function updateButtonState() {
+                if (balance < spinCost) {
+                    spinButton.disabled = true;
+                    spinButton.textContent = 'Kein Guthaben';
+                    messageBox.textContent = 'Guthaben aufgebraucht!';
+                } else {
+                    spinButton.disabled = false;
+                    spinButton.textContent = `Drehen (${spinCost} Schipps)`;
+                }
+            }
+
+            // Hauptfunktion zum Drehen, mit optionalem "isRigged"-Parameter
+            function spin(isRigged = false) {
+                if (isSpinning || balance < spinCost) return;
+                
+                isSpinning = true;
+                spinButton.disabled = true;
+                messageBox.textContent = 'Dreht sich...';
+                messageBox.classList.remove('win-message');
+                chipRainContainer.innerHTML = '';
+
+                balance -= spinCost;
+                balanceDisplay.textContent = balance;
+
+                spinSound.triggerAttackRelease("4n");
+
+                let finalSymbols = [];
+                if (isRigged) {
+                    const winSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    finalSymbols = [winSymbol, winSymbol, winSymbol];
+                } else {
+                    finalSymbols = Array.from({length: 3}, () => symbols[Math.floor(Math.random() * symbols.length)]);
+                }
+
+                reelInners.forEach((reelInner, index) => {
+                    const finalSymbol = finalSymbols[index];
+                    const finalIndex = symbols.indexOf(finalSymbol);
+                    const spinCount = Math.floor(Math.random() * 5) + 3; // Zufällige Anzahl von Drehs
+                    const finalPosition = (reelInner.children.length - (finalIndex + 2)) * symbolHeight;
+
+                    // Setzt die Transition zurück
+                    reelInner.style.transition = 'none';
+                    reelInner.style.transform = `translateY(0)`;
+                    
+                    setTimeout(() => {
+                        // Startet die Animation
+                        reelInner.style.transition = `transform ${2 + index * 0.5}s cubic-bezier(0.18, 0.89, 0.32, 1.28)`;
+                        reelInner.style.transform = `translateY(-${finalPosition}px)`;
+                    }, 50);
+
+                    setTimeout(() => {
+                        switchSound.triggerAttackRelease("G4", "8n");
+                        if (index === 2) {
+                            checkWin(finalSymbols);
+                        }
+                    }, 2000 + index * 500);
+                });
+            }
+
+            // Überprüft, ob der Spieler gewonnen hat
+            function checkWin(results) {
+                isSpinning = false;
+                
+                if (results[0] === results[1] && results[1] === results[2]) {
+                    const winAmount = spinCost * winMultiplier;
+                    balance += winAmount;
+                    balanceDisplay.textContent = balance;
+                    
+                    messageBox.textContent = `🎉 Du hast ${winAmount} Schipps gewonnen! 🎉`;
+                    messageBox.classList.add('win-message');
+                    winSound.triggerAttackRelease("C5", "8n");
+                    createChipRain(winAmount);
+                } else {
+                    messageBox.textContent = 'Leider verloren. Versuche es nochmal!';
+                }
+
+                updateButtonState();
+            }
+
+            // Erzeugt den Chip-Regen-Effekt
+            function createChipRain(amount) {
+                const chipColors = ['gold', 'silver', 'bronze'];
+                const numberOfChips = Math.min(amount / 2, 100);
+                
+                for (let i = 0; i < numberOfChips; i++) {
+                    const chip = document.createElement('div');
+                    const randomColor = chipColors[Math.floor(Math.random() * chipColors.length)];
+                    
+                    chip.classList.add('chip', randomColor);
+                    if (Math.random() > 0.7) chip.classList.add('large');
+                    if (Math.random() < 0.3) chip.classList.add('small');
+
+                    chip.style.left = `${Math.random() * 100}%`;
+                    chip.style.animationDelay = `${Math.random() * 2}s`;
+                    chipRainContainer.appendChild(chip);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
